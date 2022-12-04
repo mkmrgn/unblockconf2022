@@ -1,7 +1,7 @@
 #!/bin/bash
 
 decision_steps=$(cat <<EOF
-  - block: "What now?"
+  - block: ":thinking_face: What now?"
     prompt: "Choose the next set of steps to be dynamically generated"
     fields:
       - select: "Choices"
@@ -40,7 +40,7 @@ new_yaml=""
 case $current_state in
   logo)
     action_step=$(cat <<EOF
-  - label: "Display UnblockConf Logo"
+  - label: ":buildkite: Display UnblockConf Logo"
     command: "buildkite-agent artifact upload unblock.png && ./log_image.sh artifact://unblock.png"
 EOF
 )
@@ -49,7 +49,7 @@ EOF
 
   hello-world)
     action_step=$(cat <<EOF
-  - label: "Parallel job %N of %t"
+  - label: ":zap: Parallel job %N of %t"
     command: "echo 'Hello, world!'"
     parallelism: 5 
 EOF
@@ -59,7 +59,7 @@ EOF
 
   build-pass)
     action_step=$(cat <<EOF
-  - label: "Passing build"
+  - label: ":thumbsup: Passing build"
     command: "echo 'Exiting build with status 0' && exit 0"
 EOF
 )
@@ -68,8 +68,8 @@ EOF
 
   build-fail)
     action_step=$(cat <<EOF
-  - label: "Failing build"
-    command "echo 'Exiting build with status 1' && exit 1"
+  - label: ":thumbsdown: Failing build"
+    command: "echo 'Exiting build with status 1' && exit 1"
 EOF
 )
     new_yaml=$(printf "%s\n" "$action_step")
