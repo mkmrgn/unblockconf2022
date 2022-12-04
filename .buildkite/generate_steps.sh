@@ -1,9 +1,13 @@
 #!/bin/bash
 echo "running script"
-current_state=$(buildkite-agent meta-data get "choice")
-echo "current state: $current_state"
-case $current_state in
 
+current_state=""
+if (($BUILDKITE_LABEL != ":pipeline: Upload Pipeline")); then
+  current_state=$(buildkite-agent meta-data get "choice")
+fi
+echo "current state: $current_state"
+
+case $current_state in
   logo)
     buildkite-agent artifact upload unblock.png && ../log_image.sh artifact://unblock.png
   ;;
