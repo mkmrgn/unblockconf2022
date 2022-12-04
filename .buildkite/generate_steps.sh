@@ -1,8 +1,10 @@
 #!/bin/bash
 echo "running script"
 
+# this bit is an ugly hack to avoid checking metadata on first run of the script
 current_state=""
-if ["$BUILDKITE_LABEL" != ":pipeline: Upload Pipeline"]; then
+first_step_label=":pipeline: Upload Pipeline"
+if ["$BUILDKITE_LABEL" != "$first_step_label"]; then
   current_state=$(buildkite-agent meta-data get "choice")
 fi
 echo "current state: $current_state"
