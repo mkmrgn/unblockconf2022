@@ -27,7 +27,7 @@ if [ "$BUILDKITE_LABEL" != "$first_step_label" ]; then
   current_state=$(buildkite-agent meta-data get "choice")
 else
   printf "steps:\n"
-  printf "$decision_steps"
+  printf "%s\n" "$decision_steps"
   exit 0
 fi
 
@@ -40,7 +40,8 @@ case $current_state in
     command: "buildkite-agent artifact upload unblock.png && ./log_image.sh artifact://unblock.png"
 EOF
 )
-    new_yaml=$(printf "$action\n$decision_steps")
+#    new_yaml=$(printf "$action\n$decision_steps")
+    new_yaml=$(printf "%s\n%s" "$action" "$decision_steps")
   ;;
 
   hello-world)
@@ -51,7 +52,8 @@ EOF
     parallelism: 5 
 EOF
 )
-    new_yaml=$(printf "$action\n$decision_steps")
+#    new_yaml=$(printf "$action\n$decision_steps")
+    new_yaml=$(printf "%s\n%s" "$action" "$decision_steps")
   ;;
 
   build-pass)
@@ -61,7 +63,8 @@ EOF
     command: "echo "Exiting build with status 0" && exit 0"
 EOF
 )
-    new_yaml=$(printf "$action\n)
+#    new_yaml=$(printf "$action\n")
+    new_yaml=$(printf "%s\n" "$action")
   ;;
 
   build-fail)
@@ -71,9 +74,10 @@ EOF
     command "echo "Exiting build with status 1" && exit 1"
 EOF
 )
+#    new_yaml=$(printf "$action\n")
+    new_yaml=$(printf "%s\n" "$action")
   ;;
-    new_yaml=$(printf "$action\n")
 esac
 
 #printf "$decision_steps" | buildkite-agent pipeline upload
-printf "$new_yaml"
+printf "%s\n" "$new_yaml"
