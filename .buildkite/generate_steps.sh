@@ -2,7 +2,7 @@
 echo "running script"
 
 current_state=""
-if (($BUILDKITE_LABEL != ":pipeline: Upload Pipeline")); then
+if ["$BUILDKITE_LABEL" != ":pipeline: Upload Pipeline"]; then
   current_state=$(buildkite-agent meta-data get "choice")
 fi
 echo "current state: $current_state"
