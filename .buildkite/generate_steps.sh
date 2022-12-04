@@ -19,6 +19,7 @@ steps:
   - label: "Process input"
     command: ".buildkite/generate_steps.sh"
 EOF
+)
 
 # this bit is an ugly hack to avoid checking metadata on first run of the script
 current_state=""
