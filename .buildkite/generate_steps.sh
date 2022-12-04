@@ -72,7 +72,7 @@ EOF
 EOF
 )
   ;;
-    new_yaml=$(printf "$action\n)
+    new_yaml=$(printf "$action\n")
 esac
 
 #printf "$decision_steps" | buildkite-agent pipeline upload
