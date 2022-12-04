@@ -60,7 +60,7 @@ EOF
   build-pass)
     action_step=$(cat <<EOF
   - label: "Passing build"
-    command: "echo "Exiting build with status 0" && exit 0"
+    command: "echo 'Exiting build with status 0' && exit 0"
 EOF
 )
     new_yaml=$(printf "%s\n" "$action_step")
@@ -69,7 +69,7 @@ EOF
   build-fail)
     action_step=$(cat <<EOF
   - label: "Failing build"
-    command "echo "Exiting build with status 1" && exit 1"
+    command "echo 'Exiting build with status 1' && exit 1"
 EOF
 )
     new_yaml=$(printf "%s\n" "$action_step")
