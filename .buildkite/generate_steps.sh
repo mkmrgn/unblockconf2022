@@ -35,38 +35,42 @@ new_yaml=""
 case $current_state in
   logo)
 #    buildkite-agent pipeline upload <<EOF
-    action=$cat <<EOF
+    action=$(cat <<EOF
   - label: "Display UnblockConf Logo"
     command: "buildkite-agent artifact upload unblock.png && ./log_image.sh artifact://unblock.png"
 EOF
+)
     new_yaml=$(printf "$action\n$decision_steps")
   ;;
 
   hello-world)
 #    buildkite-agent pipeline upload <<EOF
-    action=$cat <<EOF
+    action=$(cat <<EOF
   - label: "Parallel job %N of %t"
     command: "echo 'Hello, world!'"
     parallelism: 5 
 EOF
+)
     new_yaml=$(printf "$action\n$decision_steps")
   ;;
 
   build-pass)
 #    buildkite-agent pipeline upload <<EOF    
-    action=$cat <<EOF
+    action=$(cat <<EOF
   - label: "Passing build"
     command: "echo "Exiting build with status 0" && exit 0"
 EOF
+)
     new_yaml=$(printf "$action\n)
   ;;
 
   build-fail)
 #    buildkite-agent pipeline upload <<EOF  
-    action=$cat <<EOF
+    action=$(cat <<EOF
   - label: "Failing build"
     command "echo "Exiting build with status 1" && exit 1"
 EOF
+)
   ;;
     new_yaml=$(printf "$action\n)
 esac
