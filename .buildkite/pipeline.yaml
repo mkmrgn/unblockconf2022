@@ -1,0 +1,8 @@
+steps:
+  - label: "Welcome! :rocket:"
+    command: "echo 'Welcome to UnblockConf 2022'"
+
+  - block: ":unlock: Unblock!"
+  
+  - label: "Show UnblockConf Logo :lower_left_paintbrush:"
+    command: ".buildkite/log_image.sh unblock.png"
