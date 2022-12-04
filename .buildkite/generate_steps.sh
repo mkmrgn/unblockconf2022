@@ -1,7 +1,7 @@
 #!/bin/bash
-
+echo "running script"
 current_state=$(buildkite-agent meta-data get "choice")
-
+echo "current state: $current_state"
 case $current_state in
 
   logo)
