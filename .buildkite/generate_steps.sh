@@ -9,7 +9,10 @@ fi
 
 case $current_state in
   logo)
-    buildkite-agent artifact upload unblock.png && ../log_image.sh artifact://unblock.png
+    buildkite-agent pipeline upload <<EOF
+  - label: "Display UnblockConf Logo"
+    command: "buildkite-agent artifact upload unblock.png && ../log_image.sh artifact://unblock.png"
+EOF
   ;;
 
   hello-world)
@@ -21,15 +24,17 @@ EOF
   ;;
 
   build-pass)
-    echo "Exiting build with status 0" && exit 0
+    buildkite-agent pipeline upload <<EOF    
+  - label: "Passing build"
+    command: "echo "Exiting build with status 0" && exit 0"
+EOF
   ;;
 
   build-fail)
-    echo "Exiting build with status 1" && exit 1
-  ;;
-
-  *)
-    echo "Uploading steps"
+    buildkite-agent pipeline upload <<EOF  
+  - label: "Failing build"
+    command "echo "Exiting build with status 1" && exit 1"
+EOF
   ;;
 esac
 
