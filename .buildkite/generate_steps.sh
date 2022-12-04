@@ -33,7 +33,7 @@ case $current_state in
   ;;
 esac
 
-buildkite-agent pipeline upload << EOF
+buildkite-agent pipeline upload <<EOF
 steps:
   - block: "What now?"
     prompt: "Choose the next set of steps to be dynamically generated"
