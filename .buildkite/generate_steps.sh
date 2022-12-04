@@ -35,7 +35,7 @@ case $current_state in
   logo)
     buildkite-agent pipeline upload <<EOF
   - label: "Display UnblockConf Logo"
-    command: "buildkite-agent artifact upload unblock.png && ../log_image.sh artifact://unblock.png"
+    command: "buildkite-agent artifact upload unblock.png && ./log_image.sh artifact://unblock.png"
 EOF
   ;;
 
@@ -62,4 +62,4 @@ EOF
   ;;
 esac
 
-printf "decision_steps" | buildkite-agent pipeline upload
+printf "$decision_steps" | buildkite-agent pipeline upload
