@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "running script"
 
 # this bit is an ugly hack to avoid checking metadata on first run of the script
 current_state=""
@@ -7,7 +6,6 @@ first_step_label=":pipeline: Upload Pipeline"
 if [ "$BUILDKITE_LABEL" != "$first_step_label" ]; then
   current_state=$(buildkite-agent meta-data get "choice")
 fi
-echo "current state: $current_state"
 
 case $current_state in
   logo)
@@ -18,7 +16,8 @@ case $current_state in
     buildkite-agent pipeline upload <<EOF
   - label: "Parallel job %N of %t"
     command: "echo 'Hello, world!'"
-    parallelism: 5 EOF
+    parallelism: 5 
+EOF
   ;;
 
   build-pass)
@@ -27,6 +26,7 @@ case $current_state in
 
   build-fail)
     echo "Exiting build with status 1" && exit 1
+  ;;
 
   *)
     echo "Uploading steps"
