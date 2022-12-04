@@ -5,4 +5,6 @@ steps:
   - block: ":unlock: Unblock!"
   
   - label: "Show UnblockConf Logo :lower_left_paintbrush:"
-    command: ".buildkite/log_image.sh unblock.png"
+    commands: 
+      - "buildkite-agent artifact upload unblock.png"
+      - "./log_image.sh artifact://unblock.png"
