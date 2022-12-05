@@ -1,0 +1,86 @@
+steps:
+- label: Style examples
+  command: |
+    buildkite-agent annotate 'Example `default` style' --context 'ctx-default'
+    buildkite-agent annotate 'Example `info` style' --style 'info' --context 'ctx-info'
+    buildkite-agent annotate 'Example `warning` style' --style 'warning' --context 'ctx-warn'
+    buildkite-agent annotate 'Example `error` style' --style 'error' --context 'ctx-error'
+    buildkite-agent annotate 'Example `success` style' --style 'success' --context 'ctx-success'
+    printf '%b\n' "$(cat code.md)" | buildkite-agent annotate --style 'info'
+    echo -e "\`\`\`term\nAppended message: This is a \033[0;31mtest\033[0m\n\`\`\`" | buildkite-agent annotate --append
+- block: "\U0001F4DD Annotate"
+  fields:
+  - key: body
+    text: Annotation Body
+    default: |
+      <h4>Definition List</h4>
+      <dl class="flex flex-wrap mxn1">
+        <div class="m1">
+          <dt>New Files in PR</dt>
+          <dd>
+            <big><big>88</big></big>%<br>
+            115 of 131 lines<br>
+          </dd>
+        </div>
+        <div class="m1">
+          <dt>Files Changed in PR</dt>
+          <dd>
+            <big><big>89</big></big>%<br>
+            332 of 372 lines
+          </dd>
+        </div>
+        <div class="m1">
+          <dt>All Files</dt>
+          <dd>
+            <big><big>90</big></big>%<br>
+            22,998 of 25,484 lines
+          </dd>
+        </div>
+      </dl>
+      <h4>Tables</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>foo</th>
+            <th>bar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>baz</td>
+            <td>bim</td>
+          </tr>
+        </tbody>
+      </table>
+  - key: append
+    hint: Append to the body of an existing annotation?
+    select: Append
+    default: append
+    options:
+    - label: 'Yes'
+      value: append
+    - label: 'No'
+      value: no-append
+  - key: style
+    select: Style
+    options:
+    - label: "✏️ Default"
+      value: default
+    - label: ℹ️ Information
+      value: info
+    - label: "⚠️ Warning"
+      value: warning
+    - label: "\U0001F6AB Error"
+      value: error
+    - label: "✅ Success"
+      value: success
+    required: false
+- label: "\U0001F440"
+  agents:
+  - queue=default
+  command: 'buildkite-agent meta-data get body | buildkite-agent annotate --style
+    "$(buildkite-agent meta-data get style)" $([[ $(buildkite-agent meta-data get
+    append) == ''append'' ]] && echo ''--append''); env ANNOTATE_LABEL="Update" buildkite-agent
+    pipeline upload
+
+'
