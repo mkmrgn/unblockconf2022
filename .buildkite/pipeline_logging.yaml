@@ -11,6 +11,6 @@ steps:
 
   - label: "Log group examples"
     commands:
-      - "echo '--- This creates a new log group' && cat lorem-ipsum.txt"
-      - "echo '~~~ This log group will be collapsed' && cat lorem-ipsum.txt"
-      - "echo '+++ This log group will be maximized' && cat lorem-ipsum.txt"
+      - "echo '--- This creates a new log group :white_check_mark:' && cat lorem-ipsum.txt"
+      - "echo '~~~ This log group will be de-emphasized :no_entry:' && cat lorem-ipsum.txt"
+      - "echo '+++ This log group will be maximized :star2:' && cat lorem-ipsum.txt"
