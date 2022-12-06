@@ -1,0 +1,6 @@
+steps:
+  - block: "Ready?"
+  
+  - label: "Parallel job %n of %t"
+    command: "buildkite-agent annotate 'This is a link to step $BUILDKITE_PARALLEL_INDEX - [Step $BUILDKITE_PARALLEL_INDEX]($BUILDKITE_BUILD_URL#$BUILDKITE_JOB_ID)'"
+    parallelism: 20
