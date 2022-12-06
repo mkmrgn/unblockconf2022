@@ -8,3 +8,9 @@ steps:
     commands:
       - "./inline_link.sh https://www.buildkite.com"
       - "./inline_link.sh https://buildkite.com/unblock"
+
+  - label: "Log group examples"
+    commands:
+      - "echo '--- This creates a new log group' && cat lorem-ipsum.txt"
+      - "echo '~~~ This log group will be collapsed' && cat lorem-ipsum.txt"
+      - "echo '+++ This log group will be maximized' && cat lorem-ipsum.txt"
