@@ -1,0 +1,12 @@
+steps:
+  - label: "Show UnblockConf logo in job log :lower_left_paintbrush:"
+    commands: 
+      - "buildkite-agent artifact upload unblock.png"
+      - "./log_image.sh artifact://unblock.png"
+      - "./log_image.sh artifact://unblock.png"
+      - "./log_image.sh artifact://unblock.png"
+      
+  - label: "Show URL in log"
+    commands:
+      - "./inline_link.sh https://www.buildkite.com"
+      - "./inline_link.sh https://buildkite.com/unblock"
